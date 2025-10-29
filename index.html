@@ -77,6 +77,47 @@
             background: #2a2a2a;
         }
 
+        .sidebar-nav {
+            padding: 0 8px 16px 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+
+        .chat-sidebar.collapsed .sidebar-nav {
+            display: none;
+        }
+
+        .nav-item {
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #999;
+            font-size: 14px;
+            user-select: none;
+        }
+
+        .nav-item:hover {
+            background: #2a2a2a;
+            color: #fff;
+        }
+
+        .nav-item.active {
+            background: #2a2a2a;
+            color: #fff;
+        }
+
+        .nav-item svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
         .sidebar-top {
             padding: 12px 8px;
             display: flex;
@@ -159,7 +200,7 @@
 
 
         .chat-sidebar-header {
-            padding: 8px;
+            padding: 8px 8px 4px 8px;
         }
 
         .new-chat-btn {
@@ -613,6 +654,362 @@
             40% { content: '..'; }
             60%, 100% { content: '...'; }
         }
+
+        /* Marketplace View */
+        .marketplace-view {
+            display: none;
+            flex-direction: column;
+            flex: 1;
+            background: #0d0d0d;
+            overflow-y: auto;
+        }
+
+        .marketplace-view.active {
+            display: flex;
+        }
+
+        .marketplace-view::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .marketplace-view::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .marketplace-view::-webkit-scrollbar-thumb {
+            background: #2a2a2a;
+            border-radius: 10px;
+        }
+
+        .marketplace-view::-webkit-scrollbar-thumb:hover {
+            background: #3a3a3a;
+        }
+
+        .marketplace-hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 40px 60px;
+            text-align: center;
+        }
+
+        .marketplace-hero h1 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: #fff;
+            background: linear-gradient(135deg, #fff 0%, #999 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .marketplace-hero p {
+            font-size: 20px;
+            color: #b0b0b0;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+
+        .marketplace-cta {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-primary {
+            background: #fff;
+            color: #0a0a0a;
+            padding: 14px 32px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            padding: 14px 32px;
+            border: 1px solid #444;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            border-color: #666;
+            transform: translateY(-2px);
+        }
+
+        .marketplace-stats {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        .marketplace-stats h2 {
+            font-size: 32px;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        @media (max-width: 1000px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .stat-card {
+            background: #141414;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            padding: 28px;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            border-color: #444;
+            transform: translateY(-4px);
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .stat-description {
+            font-size: 14px;
+            color: #b0b0b0;
+        }
+
+        .marketplace-nodes {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 40px 40px;
+        }
+
+        .marketplace-nodes h2 {
+            font-size: 24px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #fff;
+        }
+
+        .node-list {
+            background: #141414;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .node-header {
+            display: grid;
+            grid-template-columns: 1fr 180px 160px 140px 120px;
+            padding: 16px 24px;
+            background: #1a1a1a;
+            border-bottom: 1px solid #2a2a2a;
+            font-size: 13px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .node-item {
+            display: grid;
+            grid-template-columns: 1fr 180px 160px 140px 120px;
+            padding: 20px 24px;
+            border-bottom: 1px solid #2a2a2a;
+            transition: background 0.2s;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .node-item:last-child {
+            border-bottom: none;
+        }
+
+        .node-item:hover {
+            background: #1a1a1a;
+        }
+
+        .node-id {
+            font-family: 'Monaco', 'Courier New', monospace;
+            color: #b0b0b0;
+        }
+
+        .node-model {
+            color: #fff;
+        }
+
+        .node-performance {
+            color: #6fbf6f;
+            font-weight: 600;
+        }
+
+        .node-location {
+            color: #888;
+        }
+
+        .node-status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: #1a3a1a;
+            border: 1px solid #2a5a2a;
+            border-radius: 10px;
+            font-size: 11px;
+            color: #6fbf6f;
+            font-weight: 600;
+        }
+
+        .marketplace-how {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 40px 60px;
+        }
+
+        .marketplace-how h2 {
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #fff;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        @media (max-width: 900px) {
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #333 0%, #1a1a1a 100%);
+            border: 2px solid #444;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .step h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .step p {
+            color: #b0b0b0;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 16px;
+            padding: 32px;
+            max-width: 480px;
+            width: 90%;
+        }
+
+        .modal-content h3 {
+            font-size: 22px;
+            margin-bottom: 14px;
+            color: #fff;
+        }
+
+        .modal-content p {
+            color: #b0b0b0;
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        #initStatus {
+            margin-top: 14px;
+            padding: 10px;
+            background: #0a0a0a;
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #888;
+            display: none;
+        }
+
+        #initStatus.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -640,6 +1037,18 @@
             </div>
             <div class="chat-sidebar-header">
                 <button class="new-chat-btn" id="newChatBtn">New chat</button>
+            </div>
+            <div class="sidebar-nav">
+                <div class="nav-item" id="navNetwork">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/>
+                        <circle cx="19" cy="5" r="2"/>
+                        <circle cx="5" cy="19" r="2"/>
+                        <circle cx="19" cy="19" r="2"/>
+                        <path d="M14 12l5-7M10 12l-5 7M14 12l5 7"/>
+                    </svg>
+                    <span class="nav-item-text">Network</span>
+                </div>
             </div>
             <div class="chats-section-header" id="chatsSectionHeader">
                 <span>Chats</span>
@@ -688,6 +1097,106 @@
                 </div>
             </div>
         </main>
+
+        <!-- Marketplace View -->
+        <main class="marketplace-view" id="marketplaceView">
+            <section class="marketplace-hero">
+                <h1>Earn Credits. Run AI.</h1>
+                <p>
+                    Share your GPU power to earn credits, then spend them accessing models beyond your hardware capabilities.
+                    A decentralized marketplace for browser-based LLM inference.
+                </p>
+                <div class="marketplace-cta">
+                    <button class="btn-primary" id="joinNetworkBtn">Join Network</button>
+                    <button class="btn-secondary" id="learnMoreBtn">Learn More</button>
+                </div>
+            </section>
+
+            <section class="marketplace-stats">
+                <h2>Network Statistics</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Active Nodes</div>
+                        <div class="stat-value" id="activeNodes">1,247</div>
+                        <div class="stat-description">Contributing compute</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Total Compute</div>
+                        <div class="stat-value" id="totalCompute">3.2 TF/s</div>
+                        <div class="stat-description">Available power</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Requests Today</div>
+                        <div class="stat-value" id="requestsToday">45.2K</div>
+                        <div class="stat-description">Served requests</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Models Hosted</div>
+                        <div class="stat-value" id="modelsHosted">12</div>
+                        <div class="stat-description">Available models</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="marketplace-nodes">
+                <h2>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/>
+                        <circle cx="19" cy="5" r="2"/>
+                        <circle cx="5" cy="19" r="2"/>
+                        <circle cx="19" cy="19" r="2"/>
+                        <path d="M14 12l5-7M10 12l-5 7M14 12l5 7"/>
+                    </svg>
+                    Available Compute Nodes
+                </h2>
+                <div class="node-list">
+                    <div class="node-header">
+                        <div>Node ID</div>
+                        <div>Model</div>
+                        <div>Performance</div>
+                        <div>Location</div>
+                        <div>Status</div>
+                    </div>
+                    <div id="nodeListContainer">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <section class="marketplace-how">
+                <h2>How It Works</h2>
+                <div class="steps-grid">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Join Network</h3>
+                        <p>Open your browser and join the compute network. Your GPU power becomes available to the marketplace.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Earn Credits</h3>
+                        <p>Process inference requests and run benchmarks to earn credits based on compute provided.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Access Models</h3>
+                        <p>Spend credits to run powerful models you couldn't run locally, powered by the network.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Join Network Modal -->
+    <div class="modal" id="joinModal">
+        <div class="modal-content">
+            <h3>Join Compute Network</h3>
+            <p>This will initialize WebGPU and benchmark your device to determine compute capabilities. Your browser will begin contributing to the network.</p>
+            <div id="initStatus"></div>
+            <div class="modal-buttons">
+                <button class="btn-secondary" id="cancelBtn">Cancel</button>
+                <button class="btn-primary" id="confirmJoinBtn">Start Contributing</button>
+            </div>
+        </div>
     </div>
 
     <script type="module">
@@ -808,6 +1317,9 @@
                 // Switch to chat when clicking the title
                 titleSpan.addEventListener('click', () => {
                     switchToChat(chat.id);
+                    if (currentView === 'network') {
+                        showChatView();
+                    }
                 });
 
                 // Delete chat when clicking delete button
@@ -1015,6 +1527,9 @@
         // New chat button
         newChatBtn.addEventListener('click', () => {
             createNewChat();
+            if (currentView === 'network') {
+                showChatView();
+            }
         });
 
         // Sidebar collapse/expand
@@ -1028,16 +1543,21 @@
             chatSidebar.classList.add('collapsed');
         });
 
-        // Toggle sidebar when clicking logo (only when collapsed)
+        // Toggle sidebar when clicking logo (only when collapsed, or switch to chat when in network)
         toggleSidebarBtn.addEventListener('click', () => {
             if (chatSidebar.classList.contains('collapsed')) {
                 chatSidebar.classList.remove('collapsed');
+            } else if (currentView === 'network') {
+                showChatView();
             }
         });
 
         // New chat from icon button (when collapsed)
         newChatIconBtn.addEventListener('click', () => {
             createNewChat();
+            if (currentView === 'network') {
+                showChatView();
+            }
         });
 
         // Chats section collapse/expand
@@ -1058,6 +1578,168 @@
         renderChatList();
         renderMessages();
         initEngine();
+
+        // ==================== MARKETPLACE VIEW ====================
+
+        // View Management
+        const chatArea = document.querySelector('.chat-area');
+        const marketplaceView = document.getElementById('marketplaceView');
+        const navNetwork = document.getElementById('navNetwork');
+        const chatSidebarHeader = document.querySelector('.chat-sidebar-header');
+        const chatsSectionHeaderEl = document.getElementById('chatsSectionHeader');
+        const chatListEl = document.getElementById('chatList');
+        const sidebarNav = document.querySelector('.sidebar-nav');
+
+        let currentView = 'chat'; // 'chat' or 'network'
+
+        function showChatView() {
+            currentView = 'chat';
+            chatArea.style.display = 'flex';
+            marketplaceView.classList.remove('active');
+            navNetwork.classList.remove('active');
+            // Re-render chat list to restore active chat highlighting
+            renderChatList();
+        }
+
+        function showNetworkView() {
+            currentView = 'network';
+            chatArea.style.display = 'none';
+            marketplaceView.classList.add('active');
+            navNetwork.classList.add('active');
+            // Remove active class from all chat items
+            document.querySelectorAll('.chat-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            renderNodes();
+        }
+
+        navNetwork.addEventListener('click', showNetworkView);
+
+        // Mock node data
+        const mockNodes = [
+            { id: 'node-a3f7', model: 'Phi-3-mini', performance: '42 tok/s', location: 'US-West', status: 'online' },
+            { id: 'node-b8e2', model: 'Llama-3-8B', performance: '38 tok/s', location: 'EU-Central', status: 'online' },
+            { id: 'node-c1d9', model: 'Phi-3-mini', performance: '51 tok/s', location: 'US-East', status: 'online' },
+            { id: 'node-d4k6', model: 'Mistral-7B', performance: '35 tok/s', location: 'Asia-Pacific', status: 'online' },
+            { id: 'node-e7m3', model: 'Phi-3-mini', performance: '45 tok/s', location: 'EU-West', status: 'online' },
+            { id: 'node-f2n8', model: 'Llama-3-8B', performance: '40 tok/s', location: 'US-Central', status: 'online' },
+            { id: 'node-g9p1', model: 'Gemma-2B', performance: '68 tok/s', location: 'US-West', status: 'online' },
+            { id: 'node-h5q4', model: 'Phi-3-mini', performance: '47 tok/s', location: 'EU-North', status: 'online' },
+        ];
+
+        // Populate node list
+        function renderNodes() {
+            const container = document.getElementById('nodeListContainer');
+            container.innerHTML = mockNodes.map(node => `
+                <div class="node-item">
+                    <div class="node-id">${node.id}</div>
+                    <div class="node-model">${node.model}</div>
+                    <div class="node-performance">${node.performance}</div>
+                    <div class="node-location">${node.location}</div>
+                    <div><span class="node-status-badge">${node.status}</span></div>
+                </div>
+            `).join('');
+        }
+
+        // Animate stats on view load
+        function animateStats() {
+            const stats = [
+                { id: 'activeNodes', start: 800, end: 1247, duration: 2000 },
+                { id: 'requestsToday', start: 30, end: 45.2, duration: 2000, suffix: 'K' }
+            ];
+
+            stats.forEach(stat => {
+                const element = document.getElementById(stat.id);
+                if (!element) return;
+
+                const range = stat.end - stat.start;
+                const increment = range / (stat.duration / 16);
+                let current = stat.start;
+
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= stat.end) {
+                        current = stat.end;
+                        clearInterval(timer);
+                    }
+
+                    if (stat.suffix) {
+                        element.textContent = current.toFixed(1) + stat.suffix;
+                    } else {
+                        element.textContent = Math.floor(current).toLocaleString();
+                    }
+                }, 16);
+            });
+        }
+
+        // Modal handlers
+        const joinModal = document.getElementById('joinModal');
+        const joinBtn = document.getElementById('joinNetworkBtn');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const confirmBtn = document.getElementById('confirmJoinBtn');
+        const initStatus = document.getElementById('initStatus');
+        const learnMoreBtn = document.getElementById('learnMoreBtn');
+
+        if (joinBtn) {
+            joinBtn.addEventListener('click', () => {
+                joinModal.classList.add('active');
+            });
+        }
+
+        if (cancelBtn) {
+            cancelBtn.addEventListener('click', () => {
+                joinModal.classList.remove('active');
+                initStatus.classList.remove('active');
+                initStatus.textContent = '';
+            });
+        }
+
+        if (confirmBtn) {
+            confirmBtn.addEventListener('click', async () => {
+                initStatus.classList.add('active');
+                initStatus.textContent = 'Checking WebGPU availability...';
+
+                // Simulate initialization
+                await new Promise(resolve => setTimeout(resolve, 1000));
+
+                if (!navigator.gpu) {
+                    initStatus.textContent = '⚠️ WebGPU not available in this browser. Please use Chrome 113+ or Safari.';
+                    return;
+                }
+
+                initStatus.textContent = '✓ WebGPU available. Initializing compute engine...';
+                await new Promise(resolve => setTimeout(resolve, 1500));
+
+                initStatus.textContent = '✓ Running benchmarks...';
+                await new Promise(resolve => setTimeout(resolve, 2000));
+
+                initStatus.textContent = '✓ Successfully joined network! Switching to chat...';
+                await new Promise(resolve => setTimeout(resolve, 1000));
+
+                joinModal.classList.remove('active');
+                initStatus.classList.remove('active');
+                initStatus.textContent = '';
+                showChatView();
+            });
+        }
+
+        if (learnMoreBtn) {
+            learnMoreBtn.addEventListener('click', () => {
+                document.querySelector('.marketplace-how').scrollIntoView({ behavior: 'smooth' });
+            });
+        }
+
+        // Simulate live updates
+        setInterval(() => {
+            if (currentView === 'network') {
+                const activeNodesEl = document.getElementById('activeNodes');
+                if (activeNodesEl) {
+                    const current = parseInt(activeNodesEl.textContent.replace(/,/g, ''));
+                    const change = Math.floor(Math.random() * 10) - 5;
+                    activeNodesEl.textContent = Math.max(1000, current + change).toLocaleString();
+                }
+            }
+        }, 5000);
     </script>
 </body>
 </html>

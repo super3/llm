@@ -27,43 +27,6 @@
             height: 100vh;
         }
 
-        /* Icon Sidebar */
-        .icon-sidebar {
-            width: 50px;
-            background: #171717;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 12px 0;
-            gap: 8px;
-            border-right: 1px solid #2a2a2a;
-        }
-
-        .icon-btn {
-            width: 36px;
-            height: 36px;
-            background: transparent;
-            border: none;
-            color: #888;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-
-        .icon-btn:hover {
-            background: #2a2a2a;
-            color: #fff;
-        }
-
-        .icon-btn.active {
-            background: #2a2a2a;
-            color: #fff;
-        }
-
         /* Chat List Sidebar */
         .chat-sidebar {
             width: 260px;
@@ -71,63 +34,187 @@
             display: flex;
             flex-direction: column;
             border-right: 1px solid #2a2a2a;
-            transition: width 0.3s ease, transform 0.3s ease;
+            transition: width 0.3s ease;
+            overflow: hidden;
         }
 
         .chat-sidebar.collapsed {
-            width: 0;
-            transform: translateX(-260px);
+            width: 68px;
         }
 
-        .chat-sidebar-header {
-            padding: 16px;
-            border-bottom: 1px solid #2a2a2a;
+        .chat-sidebar.collapsed .chat-sidebar-header,
+        .chat-sidebar.collapsed .chats-section-header,
+        .chat-sidebar.collapsed .chat-list {
+            display: none;
         }
 
-        .new-chat-btn {
-            width: 100%;
-            height: 36px;
-            padding: 0 12px;
+        .chat-sidebar.collapsed .new-chat-icon-only {
+            display: flex;
+        }
+
+        .chat-sidebar.collapsed .collapse-btn {
+            display: none;
+        }
+
+        .new-chat-icon-only {
+            display: none;
+            width: 40px;
+            height: 40px;
             background: transparent;
-            border: 1px solid #2a2a2a;
-            color: #ccc;
-            border-radius: 6px;
+            border: none;
+            color: #fff;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 13px;
-            font-weight: 400;
+            transition: all 0.2s ease;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin: 0 auto;
+        }
+
+        .new-chat-icon-only:hover {
+            background: #2a2a2a;
+        }
+
+        .sidebar-top {
+            padding: 12px 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .chat-sidebar.collapsed .sidebar-top {
+            padding: 12px 14px;
+            align-items: center;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .logo-btn {
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: none;
+            color: #fff;
+            border-radius: 8px;
+            cursor: pointer;
             transition: all 0.2s ease;
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            flex-shrink: 0;
         }
 
-        .new-chat-btn:hover {
+        .logo-btn:hover {
+            background: #2a2a2a;
+        }
+
+        .chat-sidebar.collapsed .logo-btn {
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .logo-icon {
+            width: 24px;
+            height: 24px;
+            transition: opacity 0.2s ease;
+        }
+
+        .logo-btn .collapse-icon {
+            display: none;
+            width: 18px;
+            height: 18px;
+        }
+
+        .chat-sidebar.collapsed .logo-btn:hover .logo-icon {
+            display: none;
+        }
+
+        .chat-sidebar.collapsed .logo-btn:hover .collapse-icon {
+            display: block;
+        }
+
+        .collapse-btn {
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: none;
+            color: #888;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .collapse-btn:hover {
             background: #2a2a2a;
             color: #fff;
         }
 
+
+        .chat-sidebar-header {
+            padding: 8px;
+        }
+
+        .new-chat-btn {
+            width: 100%;
+            height: 40px;
+            padding: 0 12px;
+            background: transparent;
+            border: none;
+            color: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-align: left;
+        }
+
+        .new-chat-btn:hover {
+            background: #2a2a2a;
+        }
+
         .new-chat-btn::before {
-            content: '+';
-            font-size: 16px;
+            content: '✏';
+            font-size: 18px;
+            font-weight: 300;
+        }
+
+        .chats-section-header {
+            padding: 16px 20px 8px 20px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .chat-list {
             flex: 1;
             overflow-y: auto;
-            padding: 8px;
+            padding: 0 8px 8px 8px;
         }
 
         .chat-item {
             padding: 10px 12px;
-            margin-bottom: 2px;
-            border-radius: 6px;
+            margin-bottom: 1px;
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.15s ease;
-            font-size: 13px;
+            font-size: 14px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            color: #aaa;
+            color: #ccc;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -136,12 +223,10 @@
 
         .chat-item:hover {
             background: #2a2a2a;
-            color: #fff;
         }
 
         .chat-item.active {
             background: #2a2a2a;
-            color: #fff;
         }
 
         .chat-item-title {
@@ -154,13 +239,15 @@
             opacity: 0;
             background: transparent;
             border: none;
-            color: #666;
+            color: #888;
             cursor: pointer;
-            padding: 4px;
+            padding: 2px 6px;
             border-radius: 4px;
-            font-size: 12px;
+            font-size: 20px;
             transition: all 0.2s ease;
             flex-shrink: 0;
+            line-height: 1;
+            font-weight: 300;
         }
 
         .chat-item:hover .chat-item-delete {
@@ -169,7 +256,7 @@
 
         .chat-item-delete:hover {
             background: #3a3a3a;
-            color: #f87171;
+            color: #ddd;
         }
 
         /* Main Chat Area */
@@ -456,17 +543,31 @@
 </head>
 <body>
     <div class="container">
-        <!-- Icon Sidebar -->
-        <aside class="icon-sidebar">
-            <button class="icon-btn active">💬</button>
-            <button class="icon-btn">🔍</button>
-        </aside>
-
         <!-- Chat List Sidebar -->
-        <aside class="chat-sidebar">
-            <div class="chat-sidebar-header">
-                <button class="new-chat-btn" id="newChatBtn">New Chat</button>
+        <aside class="chat-sidebar" id="chatSidebar">
+            <div class="sidebar-top">
+                <button class="logo-btn" id="toggleSidebarBtn" title="Toggle sidebar">
+                    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 6v6l4 2"/>
+                    </svg>
+                    <svg class="collapse-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                        <line x1="9" y1="3" x2="9" y2="21"/>
+                    </svg>
+                </button>
+                <button class="collapse-btn" id="collapseSidebarBtn" title="Close sidebar">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                        <line x1="9" y1="3" x2="9" y2="21"/>
+                    </svg>
+                </button>
+                <button class="new-chat-icon-only" id="newChatIconBtn" title="New chat">✏</button>
             </div>
+            <div class="chat-sidebar-header">
+                <button class="new-chat-btn" id="newChatBtn">New chat</button>
+            </div>
+            <div class="chats-section-header">Chats</div>
             <div class="chat-list" id="chatList">
                 <!-- Chats will be dynamically added here -->
             </div>
@@ -626,7 +727,7 @@
 
                 const deleteBtn = document.createElement('button');
                 deleteBtn.className = 'chat-item-delete';
-                deleteBtn.innerHTML = '🗑️';
+                deleteBtn.innerHTML = '×';
                 deleteBtn.title = 'Delete chat';
 
                 // Switch to chat when clicking the title
@@ -803,6 +904,29 @@
 
         // New chat button
         newChatBtn.addEventListener('click', () => {
+            createNewChat();
+        });
+
+        // Sidebar collapse/expand
+        const chatSidebar = document.getElementById('chatSidebar');
+        const collapseSidebarBtn = document.getElementById('collapseSidebarBtn');
+        const toggleSidebarBtn = document.getElementById('toggleSidebarBtn');
+        const newChatIconBtn = document.getElementById('newChatIconBtn');
+
+        // Collapse sidebar
+        collapseSidebarBtn.addEventListener('click', () => {
+            chatSidebar.classList.add('collapsed');
+        });
+
+        // Toggle sidebar when clicking logo (only when collapsed)
+        toggleSidebarBtn.addEventListener('click', () => {
+            if (chatSidebar.classList.contains('collapsed')) {
+                chatSidebar.classList.remove('collapsed');
+            }
+        });
+
+        // New chat from icon button (when collapsed)
+        newChatIconBtn.addEventListener('click', () => {
             createNewChat();
         });
 

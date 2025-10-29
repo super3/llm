@@ -365,11 +365,92 @@
         .input-area {
             padding: 16px 24px 24px;
             background: #0d0d0d;
-            border-top: 1px solid #2a2a2a;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 8px;
+        }
+
+        .input-area.hidden {
+            display: none;
+        }
+
+        /* Empty state centered input */
+        .empty-state {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            padding: 0 24px;
+        }
+
+        .empty-state.visible {
+            display: flex;
+        }
+
+        .empty-state-headline {
+            font-size: 32px;
+            font-weight: 400;
+            color: #fff;
+            margin-bottom: 40px;
+        }
+
+        .empty-state-input-wrapper {
+            max-width: 800px;
+            width: 100%;
+            background: #2a2a2a;
+            border: none;
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            padding: 14px 24px;
+            transition: background 0.2s ease;
+        }
+
+        .empty-state-input-wrapper:focus-within {
+            background: #333;
+        }
+
+        .empty-state-input {
+            flex: 1;
+            padding: 8px 0;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            font-family: inherit;
+            outline: none;
+        }
+
+        .empty-state-input::placeholder {
+            color: #777;
+        }
+
+        .empty-state-send-btn {
+            background: transparent;
+            border: none;
+            color: #999;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .empty-state-send-btn:hover {
+            background: #3a3a3a;
+            color: #fff;
+        }
+
+        .empty-state-send-btn:disabled {
+            color: #555;
+            cursor: not-allowed;
         }
 
         .model-selector-wrapper {
@@ -390,11 +471,11 @@
         .input-wrapper {
             background: #2a2a2a;
             border: none;
-            border-radius: 10px;
+            border-radius: 28px;
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 10px 12px;
+            gap: 12px;
+            padding: 14px 24px;
             transition: background 0.2s ease;
         }
 
@@ -403,38 +484,16 @@
         }
 
         .input-tools {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .input-tool-btn {
-            width: 28px;
-            height: 28px;
-            background: transparent;
-            border: none;
-            color: #999;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 15px;
-        }
-
-        .input-tool-btn:hover {
-            background: #3a3a3a;
-            color: #fff;
+            display: none;
         }
 
         .input-box {
             flex: 1;
-            padding: 8px 12px;
+            padding: 8px 0;
             background: transparent;
             border: none;
             color: #fff;
-            font-size: 15px;
+            font-size: 16px;
             font-family: inherit;
             resize: none;
             outline: none;
@@ -472,30 +531,7 @@
         }
 
         .input-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 12px;
-            color: #666;
-            max-width: 800px;
-            width: 100%;
-            margin: 0 auto;
-            padding: 0 4px;
-        }
-
-        .standard-btn {
-            background: #4a5fff;
-            border: none;
-            color: #fff;
-            padding: 4px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 12px;
-            transition: all 0.2s ease;
-        }
-
-        .standard-btn:hover {
-            background: #5a6fff;
+            display: none;
         }
 
         /* Scrollbar Styling */
@@ -619,20 +655,22 @@
                 <div class="status-indicator"></div>
                 <span class="status-text">Initializing...</span>
             </div>
-            <div class="messages-container" id="messagesContainer">
-                <div class="message assistant">
-                    <div class="message-header">
-                        <div class="message-avatar">🤖</div>
-                        <div class="message-role">Assistant</div>
-                    </div>
-                    <div class="message-content">
-                        Welcome! I'm running locally in your browser using WebLLM. Once the model loads, you can chat with me completely offline!
-                    </div>
+
+            <!-- Empty state for new chats -->
+            <div class="empty-state" id="emptyState">
+                <div class="empty-state-headline">Ready when you are.</div>
+                <div class="empty-state-input-wrapper">
+                    <input type="text" class="empty-state-input" id="emptyStateInput" placeholder="Ask anything" />
+                    <button class="empty-state-send-btn" id="emptyStateSendBtn">➤</button>
                 </div>
+            </div>
+
+            <div class="messages-container" id="messagesContainer">
+                <!-- Messages will be dynamically added here -->
             </div>
             <div class="typing-indicator" id="typingIndicator">Assistant is typing</div>
 
-            <div class="input-area">
+            <div class="input-area" id="inputArea">
                 <div class="input-container">
                     <div class="input-wrapper">
                         <div class="input-tools">
@@ -642,17 +680,9 @@
                         <textarea
                             class="input-box"
                             rows="1"
-                            placeholder="Send a message to the model..."
+                            placeholder="Ask anything"
                         ></textarea>
                         <button class="send-btn">➤</button>
-                    </div>
-                </div>
-                <div class="input-footer">
-                    <div class="footer-left">
-                        <button class="standard-btn">Standard</button>
-                    </div>
-                    <div class="footer-right">
-                        <span>User: 0/21 | Finish: (0)</span>
                     </div>
                 </div>
             </div>
@@ -677,6 +707,10 @@
         const statusText = document.querySelector('.status-text');
         const chatList = document.getElementById('chatList');
         const newChatBtn = document.getElementById('newChatBtn');
+        const emptyState = document.getElementById('emptyState');
+        const emptyStateInput = document.getElementById('emptyStateInput');
+        const emptyStateSendBtn = document.getElementById('emptyStateSendBtn');
+        const inputArea = document.getElementById('inputArea');
 
         // Chat Management Functions
         function generateChatId() {
@@ -796,18 +830,16 @@
             messagesContainer.innerHTML = '';
 
             if (chat.messages.length === 0) {
-                messagesContainer.innerHTML = `
-                    <div class="message assistant">
-                        <div class="message-header">
-                            <div class="message-avatar">🤖</div>
-                            <div class="message-role">Assistant</div>
-                        </div>
-                        <div class="message-content">
-                            Welcome! I'm running locally in your browser using WebLLM. How can I help you today?
-                        </div>
-                    </div>
-                `;
+                // Show empty state
+                emptyState.classList.add('visible');
+                messagesContainer.style.display = 'none';
+                inputArea.classList.add('hidden');
             } else {
+                // Show messages
+                emptyState.classList.remove('visible');
+                messagesContainer.style.display = 'block';
+                inputArea.classList.remove('hidden');
+
                 chat.messages.forEach(msg => {
                     addMessageToUI(msg.role, msg.content);
                 });
@@ -832,6 +864,8 @@
                 statusText.textContent = `${MODEL} ready! Chat is 100% local and private.`;
                 textarea.disabled = false;
                 sendBtn.disabled = false;
+                emptyStateInput.disabled = false;
+                emptyStateSendBtn.disabled = false;
 
                 console.log('WebLLM engine initialized successfully');
             } catch (error) {
@@ -883,9 +917,18 @@
             const userMessage = textarea.value.trim();
             if (!userMessage || !engine || !activeChat) return;
 
+            // If in empty state, switch to normal view
+            if (emptyState.classList.contains('visible')) {
+                emptyState.classList.remove('visible');
+                messagesContainer.style.display = 'block';
+                inputArea.classList.remove('hidden');
+            }
+
             // Disable input while processing
             textarea.disabled = true;
             sendBtn.disabled = true;
+            emptyStateInput.disabled = true;
+            emptyStateSendBtn.disabled = true;
 
             // Add user message
             addMessage('user', userMessage);
@@ -921,6 +964,8 @@
                 typingIndicator.classList.remove('active');
                 textarea.disabled = false;
                 sendBtn.disabled = false;
+                emptyStateInput.disabled = false;
+                emptyStateSendBtn.disabled = false;
                 textarea.focus();
             }
         }
@@ -941,6 +986,30 @@
 
         // Send button click handler
         sendBtn.addEventListener('click', sendMessage);
+
+        // Empty state input handlers
+        emptyStateInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                const message = emptyStateInput.value.trim();
+                if (message && engine && activeChat) {
+                    // Copy message to main input and send
+                    textarea.value = message;
+                    emptyStateInput.value = '';
+                    sendMessage();
+                }
+            }
+        });
+
+        emptyStateSendBtn.addEventListener('click', () => {
+            const message = emptyStateInput.value.trim();
+            if (message && engine && activeChat) {
+                // Copy message to main input and send
+                textarea.value = message;
+                emptyStateInput.value = '';
+                sendMessage();
+            }
+        });
 
         // New chat button
         newChatBtn.addEventListener('click', () => {
@@ -980,6 +1049,8 @@
         // Disable input until model loads
         textarea.disabled = true;
         sendBtn.disabled = true;
+        emptyStateInput.disabled = true;
+        emptyStateSendBtn.disabled = true;
 
         // Initialize on page load
         loadChats();

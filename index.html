@@ -196,17 +196,54 @@
             color: #666;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .chats-section-header:hover {
+            color: #888;
+        }
+
+        .chats-section-header:hover .chats-caret {
+            color: #888;
+        }
+
+        .chats-caret {
+            font-size: 14px;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+            color: #666;
+            transform: rotate(90deg);
+            opacity: 0;
+        }
+
+        .chats-section-header:hover .chats-caret {
+            opacity: 1;
+        }
+
+        .chats-section-header.collapsed .chats-caret {
+            transform: rotate(0deg);
         }
 
         .chat-list {
             flex: 1;
             overflow-y: auto;
             padding: 0 8px 8px 8px;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+        }
+
+        .chat-list.collapsed {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            padding: 0 8px;
         }
 
         .chat-item {
-            padding: 10px 12px;
-            margin-bottom: 1px;
+            padding: 8px 12px;
+            margin-bottom: 0;
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.15s ease;
@@ -567,7 +604,10 @@
             <div class="chat-sidebar-header">
                 <button class="new-chat-btn" id="newChatBtn">New chat</button>
             </div>
-            <div class="chats-section-header">Chats</div>
+            <div class="chats-section-header" id="chatsSectionHeader">
+                <span>Chats</span>
+                <span class="chats-caret">›</span>
+            </div>
             <div class="chat-list" id="chatList">
                 <!-- Chats will be dynamically added here -->
             </div>
@@ -928,6 +968,13 @@
         // New chat from icon button (when collapsed)
         newChatIconBtn.addEventListener('click', () => {
             createNewChat();
+        });
+
+        // Chats section collapse/expand
+        const chatsSectionHeader = document.getElementById('chatsSectionHeader');
+        chatsSectionHeader.addEventListener('click', () => {
+            chatsSectionHeader.classList.toggle('collapsed');
+            chatList.classList.toggle('collapsed');
         });
 
         // Disable input until model loads

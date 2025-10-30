@@ -1579,6 +1579,12 @@
         renderMessages();
         initEngine();
 
+        // Restore saved view
+        const savedView = localStorage.getItem('currentView');
+        if (savedView === 'network') {
+            showNetworkView();
+        }
+
         // ==================== MARKETPLACE VIEW ====================
 
         // View Management
@@ -1599,6 +1605,8 @@
             navNetwork.classList.remove('active');
             // Re-render chat list to restore active chat highlighting
             renderChatList();
+            // Save view to localStorage
+            localStorage.setItem('currentView', 'chat');
         }
 
         function showNetworkView() {
@@ -1611,6 +1619,8 @@
                 item.classList.remove('active');
             });
             renderNodes();
+            // Save view to localStorage
+            localStorage.setItem('currentView', 'network');
         }
 
         navNetwork.addEventListener('click', showNetworkView);
